@@ -1,15 +1,57 @@
-import { Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
+import groups from "../data/group.json"
+import { Link } from "expo-router";
+import { IconSymbol } from "./components/IconSymbol";
+
 
 const Home = ()=> {
-    return <View style = {style}>
-        <Text>Home Page</Text>
-    </View>
+    return (
+        <FlatList
+            data = {groups}
+            renderItem={({item}) => (
+                <Link
+                    href={{
+                        pathname: "/[group]",
+                        params: {group: item["label"]}         
+                    }}
+                >
+                    <View style={style.cardBox}>
+                        <View style={style.title}>
+                            <Text style={style.titleFont}>{[item["label"]]}</Text>
+                        </View>
+                        <IconSymbol name="chevron.right" color="#FFFFFF" />
+                    </View>
+                </Link>
+            )}
+            contentInsetAdjustmentBehavior="automatic"
+            contentContainerStyle={{
+                padding: 16,
+                gap: 16
+            }}
+        />
+    )
 }
 
 export default Home;
 
 const style = {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    cardBox: {
+        gap: 6,
+        padding: 16,
+        width: "100%",
+        borderRadius: 16,
+        alignItems: "Center",
+        flexDirection: "row",
+        backgroundColor: "#007AFF",
+        justifyContent: "space-between"
+    },
+    title: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 4
+    },
+    titleFont: {
+        fontSize: 17,
+        color: "#FFFFFF"
+    }
 }
