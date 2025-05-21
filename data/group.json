@@ -1,20 +1,26 @@
 [
   {
+    "Id": 1,
     "label": "You"
   },
   {
+    "Id": 2,
     "label": "Home"
   },
   {
+    "Id": 3,
     "label": "Love"
   },
   {
+    "Id": 4,
     "label": "Family"
   },
   {
+    "Id": 5,
     "label": "Friends"
   },
   {
+    "Id": 6,
     "label": "School"
   }
 ]

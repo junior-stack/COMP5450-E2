@@ -1,18 +1,21 @@
 import { FlatList, Text, View } from "react-native";
-import groups from "../data/group.json"
 import { Link } from "expo-router";
 import { IconSymbol } from "./components/IconSymbol";
+import { useMessageContext } from "./store/messageContext";
 
 
 const Home = ()=> {
+    const { state, dispatch } = useMessageContext();
+    const group = state["data"];
+
     return (
         <FlatList
-            data = {groups}
+            data = {group}
             renderItem={({item}) => (
                 <Link
                     href={{
                         pathname: "/[group]",
-                        params: {group: item["label"]}         
+                        params: {group: item["Id"]}         
                     }}
                 >
                     <View style={style.cardBox}>
