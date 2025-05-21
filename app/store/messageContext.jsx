@@ -11,7 +11,7 @@ const messageReducer = (state, action) => {
     switch(action.type){
         case 'ADD_GROUP':
             return {
-                data: [...state.data, {id: state.data.length}]
+                data: [...state.data, {id: state.data.length, "label": action.payload["groupName"]}]
             };
         case 'ADD_MESSAGE':
             return state;
