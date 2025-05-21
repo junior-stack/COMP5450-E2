@@ -1,26 +1,32 @@
 [
   {
+    "Id": 0,
+    "label": "You",
+    "messages": ["hello", "nice to meet you"]
+  },
+  {
     "Id": 1,
-    "label": "You"
+    "label": "Home",
+    "messages": []
   },
   {
     "Id": 2,
-    "label": "Home"
+    "label": "Love",
+    "messages": []
   },
   {
     "Id": 3,
-    "label": "Love"
+    "label": "Family",
+    "messages": []
   },
   {
     "Id": 4,
-    "label": "Family"
+    "label": "Friends",
+    "messages": []
   },
   {
     "Id": 5,
-    "label": "Friends"
-  },
-  {
-    "Id": 6,
-    "label": "School"
+    "label": "School",
+    "messages": []
   }
 ]

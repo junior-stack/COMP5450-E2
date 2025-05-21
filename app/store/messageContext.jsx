@@ -14,6 +14,8 @@ const messageReducer = (state, action) => {
                 data: [...state.data, {id: state.data.length, "label": action.payload["groupName"]}]
             };
         case 'ADD_MESSAGE':
+            const groupId = action.payload["GroupId"];
+            state.data[groupId]["messages"].push(action.payload["msg"])
             return state;
         case 'EDIT_MESSAGE':
             return state;
