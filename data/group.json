@@ -10,26 +10,26 @@
   {
     "Id": 1,
     "label": "Home",
-    "messages": []
+    "messages": [{ "Id": 0, "msg": "This is home" }]
   },
   {
     "Id": 2,
     "label": "Love",
-    "messages": []
+    "messages": [{ "Id": 0, "msg": "I love you" }]
   },
   {
     "Id": 3,
     "label": "Family",
-    "messages": []
+    "messages": [{ "Id": 0, "msg": "We are family" }]
   },
   {
     "Id": 4,
     "label": "Friends",
-    "messages": []
+    "messages": [{ "Id": 0, "msg": "This is my best friend" }]
   },
   {
     "Id": 5,
     "label": "School",
-    "messages": []
+    "messages": [{ "Id": 0, "msg": "I need to go to school" }]
   }
 ]
