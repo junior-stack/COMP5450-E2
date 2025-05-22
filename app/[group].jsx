@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { LegendList } from "@legendapp/list";
 import { IconSymbol } from "./components/IconSymbol"
+import MessageBox from "./components/MessageBox";
 
 export default function Group(){
     const {group: groupId} = useLocalSearchParams();
@@ -23,11 +24,40 @@ export default function Group(){
             return;
         }
 
-        dispatch({type: "ADD_MESSAGE", payload: {"GroupId": groupId, "msg": newMessage}});
-        const newMsgList = [...messages, newMessage];
+        const newMsgId = messages.length === 0 ? 0 : (messages.reduce((maxObj, CurrObj) =>{
+            return CurrObj["Id"] > maxObj["Id"] ? CurrObj : maxObj
+        }, messages[0])["Id"] + 1);
+        const newMsgList = [...messages, {"Id": newMsgId, "msg": newMessage}];
+        dispatch({type: "ADD_MESSAGE", payload: {"GroupId": groupId, "msg": newMessage, "msgIndex": newMsgId}});
         setMessages(newMsgList);
         setNewMessage("");
     }
+
+    const editText = (txt, msgIndex) => {
+        if(txt === ""){
+            dispatch({type: "DELETE_MESSAGE", payload: {"msgIndex": msgIndex, "GroupId": groupId}});
+            newMsgList = messages.filter(msg => msg["Id"] != msgIndex);
+            setMessages(newMsgList);
+
+        }
+        else{
+            dispatch({type: "EDIT_MESSAGE", payload: {"msg": txt, "msgIndex": msgIndex, "GroupId": groupId}});
+            newMsgList = [...messages];
+
+            const index = newMsgList.findIndex(item => item["Id"] == msgIndex);
+            newMsgList[index] = {"Id": msgIndex, "msg": txt};
+            setMessages(newMsgList);
+        }
+    }
+
+    const messageBox = ({item}) => (
+        <View style={style.messageBoxWrapper}>
+            <MessageBox
+                value={item}
+                editText={editText}
+            />
+        </View>
+    );
 
     return (
         <>
@@ -105,18 +135,6 @@ const style = {
         maxWidth: "80%",
         alignSelf: "flex-end"
     },
-    messageBox: {
-        backgroundColor: "#666666",
-        flex: 1,
-        padding: 10,
-        borderRadius: 10
-    }
+    
 };
 
-const messageBox = ({item}) => (
-    <View style={style.messageBoxWrapper}>
-        <View style={style.messageBox}>
-            <Text>{item}</Text>
-        </View>
-    </View>
-);

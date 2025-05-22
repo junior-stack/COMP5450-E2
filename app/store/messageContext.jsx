@@ -14,12 +14,19 @@ const messageReducer = (state, action) => {
                 data: [...state.data, {id: state.data.length, "label": action.payload["groupName"]}]
             };
         case 'ADD_MESSAGE':
-            const groupId = action.payload["GroupId"];
-            state.data[groupId]["messages"].push(action.payload["msg"])
+            groupId = action.payload["GroupId"];
+            state.data[groupId]["messages"].push({"Id": action.payload["msgIndex"], "msg": action.payload["msg"]})
             return state;
         case 'EDIT_MESSAGE':
+            const msg = action.payload["msg"];
+            groupId = action.payload["GroupId"];
+            index = state.data[groupId]["messages"].findIndex(item => item["Id"] == action.payload["msgIndex"]);
+            state.data[groupId]["messages"][index] = {"Id": action.payload["msgIndex"], "msg": msg};
             return state;
         case 'DELETE_MESSAGE':
+            groupId = action.payload["GroupId"];
+            index = state.data[groupId]["messages"].findIndex(item => item["Id"] == action.payload["msgIndex"]);
+            state.data[groupId]["messages"].splice(index, 1);
             return state;
         default:
             return state;

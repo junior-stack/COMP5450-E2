@@ -2,7 +2,10 @@
   {
     "Id": 0,
     "label": "You",
-    "messages": ["hello", "nice to meet you"]
+    "messages": [
+      { "Id": 0, "msg": "hello" },
+      { "Id": 1, "msg": "nice to meet you" }
+    ]
   },
   {
     "Id": 1,
